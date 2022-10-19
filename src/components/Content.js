@@ -1,13 +1,13 @@
-import { Heading, VStack, SimpleGrid, GridItem } from "@chakra-ui/react";
-import { useState } from "react";
+import { Heading, VStack, SimpleGrid } from "@chakra-ui/react";
 import Filter from "./Filter";
 import PropertyCard from "./PropertyCard";
+import { useSelector } from "react-redux";
 
 export default function Content() {
-  const [type, setType] = useState("House");
-  const [price, setPrice] = useState("3000");
-  const [location, setLocation] = useState("New York, USA");
-  const [moveInDate, setMoveInDate] = useState("15 Nov, 2022");
+  const type = useSelector((state) => state.filter.type);
+  const price = useSelector((state) => state.filter.price);
+  const location = useSelector((state) => state.filter.location);
+  const moveInDate = useSelector((state) => state.filter.moveInDate);
 
   let filteredList = arr.filter((item) => {
     if (
@@ -27,16 +27,7 @@ export default function Content() {
       <Heading size={"xl"} alignSelf={"start"}>
         Search properties to rent
       </Heading>
-      <Filter
-        type={type}
-        setType={setType}
-        location={location}
-        setLocation={setLocation}
-        price={price}
-        setPrice={setPrice}
-        moveInDate={moveInDate}
-        setMoveInDate={setMoveInDate}
-      />
+      <Filter />
       <SimpleGrid
         justifyItems="center"
         columns={3}

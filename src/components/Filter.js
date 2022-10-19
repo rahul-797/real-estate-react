@@ -11,17 +11,21 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
-
-export default function Filter({
-  type,
+import { useSelector, useDispatch } from "react-redux";
+import {
   setType,
-  location,
-  setLocation,
-  price,
   setPrice,
-  moveInDate,
+  setLocation,
   setMoveInDate,
-}) {
+} from "../redux/filterSlice";
+
+export default function Filter() {
+  const type = useSelector((state) => state.filter.type);
+  const price = useSelector((state) => state.filter.price);
+  const location = useSelector((state) => state.filter.location);
+  const moveInDate = useSelector((state) => state.filter.moveInDate);
+  const dispatch = useDispatch();
+
   return (
     <Box alignSelf={"center"} borderRadius="lg" borderWidth="1px" w="4xl">
       <HStack justify={"center"} p={4} height="24" gap={"4%"}>
@@ -38,14 +42,14 @@ export default function Filter({
             <MenuList>
               <MenuItem
                 onClick={() => {
-                  setLocation("New York, USA");
+                  dispatch(setLocation("New York, USA"));
                 }}
               >
                 New York, USA
               </MenuItem>
               <MenuItem
                 onClick={() => {
-                  setLocation("London, UK");
+                  dispatch(setLocation("London, UK"));
                 }}
               >
                 London, UK
@@ -67,14 +71,14 @@ export default function Filter({
             <MenuList>
               <MenuItem
                 onClick={() => {
-                  setMoveInDate("15 Nov, 2022");
+                  dispatch(setMoveInDate("15 Nov, 2022"));
                 }}
               >
                 15 Nov, 2022
               </MenuItem>
               <MenuItem
                 onClick={() => {
-                  setMoveInDate("1 Jan, 2023");
+                  dispatch(setMoveInDate("1 Jan, 2023"));
                 }}
               >
                 1 Jan, 2023
@@ -96,14 +100,14 @@ export default function Filter({
             <MenuList>
               <MenuItem
                 onClick={() => {
-                  setPrice("3000");
+                  dispatch(setPrice("3000"));
                 }}
               >
                 $1000 - $3000
               </MenuItem>
               <MenuItem
                 onClick={() => {
-                  setPrice("5000");
+                  dispatch(setPrice("5000"));
                 }}
               >
                 $3000 - $5000
@@ -125,14 +129,14 @@ export default function Filter({
             <MenuList>
               <MenuItem
                 onClick={() => {
-                  setType("House");
+                  dispatch(setType("House"));
                 }}
               >
                 House
               </MenuItem>
               <MenuItem
                 onClick={() => {
-                  setType("Office");
+                  dispatch(setType("Office"));
                 }}
               >
                 Office
